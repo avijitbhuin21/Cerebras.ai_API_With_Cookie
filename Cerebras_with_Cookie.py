@@ -13,11 +13,17 @@ class Cerebras_with_Cookie:
               api_key=self.get_demo_api_key(cookie_path),
           )
         self.model = model
-
     def extract_query(self, text: str) -> str:
         pattern = r"```(.*?)```"
         matches = re.findall(pattern, text, re.DOTALL)
         return matches[0] if matches else text
+
+    def refiner(self, text):
+        if text.startswith('"'):
+            text = text[1:]
+        if text.endswith('"'):
+            text = text[:-1]
+        return text
 
     def get_demo_api_key(self,cookie_path):
         cookies = {i['name']: i['value'] for i in json.loads(open(cookie_path,'r').read())}
@@ -48,18 +54,35 @@ class Cerebras_with_Cookie:
         except:
             print(response.text)
 
-    def ask(self, question, sys = "You Are A Helpful Assistant. Try to Help the User According to the Provided Instructions."):
-        chat_completion = self.client.chat.completions.create(
-            messages = [
-                        {
-                            'content': sys,
-                            'role': 'system',
-                        },
-                        {
-                            'content': question,
-                            'role': 'user',
-                        },
-                    ],
-            model=self.model,
+    def ask(self, question, sys="You Are A Helpful Assistant. Try to Help the User According to the Provided Instructions.", json_response=False):
+        if json_response:
+            chat_completion = self.client.chat.completions.create(
+                messages=[
+                    {
+                        'content': sys,
+                        'role': 'system',
+                    },
+                    {
+                        'content': question,
+                        'role': 'user',
+                    },
+                ],
+                model=self.model,
+                response_format={"type": "json_object"}
             )
-        return self.extract_query(chat_completion.choices[0].message.content)
+            return self.extract_query(chat_completion.choices[0].message.content)
+        else:
+            chat_completion = self.client.chat.completions.create(
+                messages=[
+                    {
+                        'content': sys,
+                        'role': 'system',
+                    },
+                    {
+                        'content': question,
+                        'role': 'user',
+                    },
+                ],
+                model=self.model,
+            )
+            return self.extract_query(chat_completion.choices[0].message.content)
