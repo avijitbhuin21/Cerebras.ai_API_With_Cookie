@@ -57,5 +57,30 @@ llm_client = Cerebras_with_Cookie(cookie_path='/your/path/to/cookies.json', mode
 response = llm_client.ask("Tell me a story of a boy and a dog")
 print(response)
 ```
+Using the JSON mode 
+```python
+from cerebras_cloud_sdk import Cerebras_with_Cookie
 
-In the above example, make sure to replace `'/your/path/to/cookies.json'` with the actual path to your `cookies.json` file. If no model is provided, **Llama 3.1-8B** will be used by default.
+# Using the Llama 3.1-70B model
+llm_client = Cerebras_with_Cookie(cookie_path='/your/path/to/cookies.json', model='llama3.1-70b')
+response = llm_client.ask('''Generate 5 diseases in the following JSON format:
+
+'''json
+{
+  "data": [
+    {
+      "Disease": "string",
+      "symptoms": ["string", "string", ...],
+      "treatments": ["string", "string", ...]
+    },
+  ]
+}
+'''
+
+Where:
+- `"Disease"` is the name of the disease.
+- `"symptoms"` is a list of symptoms associated with the disease.
+- `"treatments"` is a list of treatments for the disease.''', json_response=True)
+print(response)
+```
+In the above examples, make sure to replace `'/your/path/to/cookies.json'` with the actual path to your `cookies.json` file. If no model is provided, **Llama 3.1-8B** will be used by default.
