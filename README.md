@@ -4,11 +4,22 @@ This is an unofficial API for [Cerebras.ai](https://www.cerebras.net/), designed
 
 ## Prerequisites
 
-Before using the API, ensure you have installed the required SDK. You can install the `cerebras_cloud_sdk` by running the following command:
+1. Install the required SDK by running the following command:
 
-```bash
-pip install cerebras_cloud_sdk
-```
+   ```bash
+   pip install cerebras_cloud_sdk
+   ```
+
+2. Install the **"Cookie-Editor"** extension for either Chrome or Edge:
+   - [Chrome Extension](https://chrome.google.com/webstore/detail/cookieeditor/neaplmfkghagebokkhpjpoebhdledlfi).
+   - [Edge Extension](https://microsoftedge.microsoft.com/addons/detail/cookieeditor/neaplmfkghagebokkhpjpoebhdledlfi).
+
+   Once installed, follow these steps to export your cookies:
+   - Open the website from which you want to extract cookies.
+   - Click on the **Cookie-Editor** extension icon.
+   - Click the **"Export"** button to save your cookies in JSON format.
+   - Create a file in your working directory named `cookies.json`.
+   - Paste the data copied from the Cookie-Editor into `cookies.json` and save it.
 
 ## Quota and Usage Limits
 
@@ -42,9 +53,9 @@ By default, the API uses the **Llama 3.1-8B** model. You can also switch to othe
 from cerebras_cloud_sdk import Cerebras_with_Cookie
 
 # Using the Llama 3.1-70B model
-llm_client = Cerebras_with_Cookie(cookie_path='cookies.json', model='llama3.1-70b')
+llm_client = Cerebras_with_Cookie(cookie_path='/your/path/to/cookies.json', model='llama3.1-70b')
 response = llm_client.ask("Tell me a story of a boy and a dog")
 print(response)
 ```
 
-In the above example, the Llama 3.1-70B model is explicitly specified. If no model is provided, **Llama 3.1-8B** will be used by default.
+In the above example, make sure to replace `'/your/path/to/cookies.json'` with the actual path to your `cookies.json` file. If no model is provided, **Llama 3.1-8B** will be used by default.
