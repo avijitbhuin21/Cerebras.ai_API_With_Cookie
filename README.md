@@ -11,7 +11,7 @@ This is an unofficial API for [Cerebras.ai](https://www.cerebras.net/), designed
    ```
 
 2. Install the **"Cookie-Editor"** extension for either Chrome or Edge:
-   - [Chrome Extension](https://chrome.google.com/webstore/detail/cookieeditor/neaplmfkghagebokkhpjpoebhdledlfi).
+   - [Chrome Extension](https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm).
    - [Edge Extension](https://microsoftedge.microsoft.com/addons/detail/cookieeditor/neaplmfkghagebokkhpjpoebhdledlfi).
 
    Once installed, follow these steps to export your cookies:
