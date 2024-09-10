@@ -63,7 +63,7 @@ from cerebras_cloud_sdk import Cerebras_with_Cookie
 
 # Using the Llama 3.1-70B model
 llm_client = Cerebras_with_Cookie(cookie_path='/your/path/to/cookies.json', model='llama3.1-70b')
-response = llm_client.ask('''Generate 5 diseases in the following JSON format:
+response = llm_client.ask("""Generate 5 diseases in the following JSON format:
 
 '''json
 {
@@ -80,7 +80,7 @@ response = llm_client.ask('''Generate 5 diseases in the following JSON format:
 Where:
 - `"Disease"` is the name of the disease.
 - `"symptoms"` is a list of symptoms associated with the disease.
-- `"treatments"` is a list of treatments for the disease.''', json_response=True)
+- `"treatments"` is a list of treatments for the disease.""", json_response=True)
 print(response)
 ```
 In the above examples, make sure to replace `'/your/path/to/cookies.json'` with the actual path to your `cookies.json` file. If no model is provided, **Llama 3.1-8B** will be used by default.
